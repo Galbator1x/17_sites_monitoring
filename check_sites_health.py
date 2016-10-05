@@ -39,7 +39,7 @@ def is_domain_paid_for_month_ahead(expiration_date):
     return 'Yes' if domain_is_paid else 'No'
 
 
-def check_sites_health(urls_list):
+def get_list_of_sites_health(urls_list):
     sites_health = []
     for url in urls_list:
         server_works = 'Yes' if is_server_respond_with_200(url) else 'No'
@@ -68,6 +68,6 @@ if __name__ == '__main__':
         exit()
 
     try:
-        output_sites_health_to_console(check_sites_health(urls))
+        output_sites_health_to_console(get_list_of_sites_health(urls))
     except (ConnectionResetError, ConnectionError):
-        print('Failed to connect, try later')
+        print('Failed to connect, try later.')

@@ -1,13 +1,16 @@
 import requests
 import pythonwhois
 import os
+import argparse
 from datetime import datetime, timedelta
 from urllib.parse import urlparse
-from sys import argv
 
 
-def get_filepath_from_argv(argv):
-    return argv[1]
+def get_filepath():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filepath', help='path to the list of urls')
+    args = parser.parse_args()
+    return args.filepath
 
 
 def load_urls_for_check(filepath):
@@ -56,12 +59,7 @@ def output_sites_health_to_console(sites_health):
 
 
 if __name__ == '__main__':
-    try:
-        filepath = get_filepath_from_argv(argv)
-    except IndexError:
-        print('Enter the path to the list of urls by first parameter.')
-        exit()
-
+    filepath = get_filepath()
     urls = load_urls_for_check(filepath)
     if urls is None:
         print('File does not exists.')

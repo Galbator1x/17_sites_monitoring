@@ -6,6 +6,11 @@ from datetime import datetime, timedelta
 from urllib.parse import urlparse
 
 
+SERVER_WORKS = 0
+DOMAIN_IS_PAID = 1
+SITE_URL = 2
+
+
 def get_filepath():
     parser = argparse.ArgumentParser()
     parser.add_argument('filepath', help='path to the list of urls')
@@ -55,7 +60,7 @@ def get_list_of_sites_health(urls_list):
 def output_sites_health_to_console(sites_health):
     for site in sites_health:
         print('server works: {}, domain is paid for a month ahead: {}  {}'.
-              format(site[0], site[1], site[2]))
+              format(site[SERVER_WORKS], site[DOMAIN_IS_PAID], site[SITE_URL]))
 
 
 if __name__ == '__main__':

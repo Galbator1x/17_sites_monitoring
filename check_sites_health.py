@@ -6,9 +6,7 @@ from datetime import datetime, timedelta
 from urllib.parse import urlparse
 
 
-SERVER_WORKS = 0
-DOMAIN_IS_PAID = 1
-SITE_URL = 2
+PAID_DAYS_COUNT_AHEAD = 30
 
 
 def get_filepath():
@@ -43,7 +41,7 @@ def get_domain_expiration_date(domain_name):
 def is_domain_paid_for_month_ahead(expiration_date):
     if expiration_date is None:
         return 'No data'
-    domain_is_paid = datetime.now() <= expiration_date - timedelta(days=30)
+    domain_is_paid = datetime.now() <= expiration_date - timedelta(days=PAID_DAYS_COUNT_AHEAD)
     return 'Yes' if domain_is_paid else 'No'
 
 
@@ -60,7 +58,7 @@ def get_list_of_sites_health(urls_list):
 def output_sites_health_to_console(sites_health):
     for site in sites_health:
         print('server works: {}, domain is paid for a month ahead: {}  {}'.
-              format(site[SERVER_WORKS], site[DOMAIN_IS_PAID], site[SITE_URL]))
+              format(site[0], site[1], site[2]))
 
 
 if __name__ == '__main__':

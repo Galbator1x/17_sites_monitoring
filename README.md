@@ -18,5 +18,3 @@ Requirements
 ------------
 
 - Python >= 3.4
-- requests==2.11.1
-- pythonwhois==2.3.4
